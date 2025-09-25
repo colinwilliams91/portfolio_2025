@@ -1,0 +1,24 @@
+# Keep the planning doc local-only
+.github/copilot-instructions.md
+
+# Node
+node_modules/
+*.log
+
+# Vite/Build artifacts
+frontend/dist/
+
+# Dotnet
+api/bin/
+api/obj/
+
+# Env
+*.env
+*.env.local
+.env
+.env.local
+
+# OS/editor cruft
+.DS_Store
+Thumbs.db
+.vscode/
