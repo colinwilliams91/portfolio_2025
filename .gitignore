@@ -1,5 +1,6 @@
 # Keep the planning doc local-only
 .github/copilot-instructions.md
+/docs
 
 # Node
 node_modules/

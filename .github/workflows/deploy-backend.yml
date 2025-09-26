@@ -1,37 +1,36 @@
-name: .NET Core CI
+name: Deploy API to Azure App Service
 
-on: [push]
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "api/**"
+      - ".github/workflows/deploy-backend.yml"
 
 env:
-  AZURE_WEBAPP_NAME: my-app-name    # Set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: '.'      # Set this to the path to your web app project, defaults to the repository root
-  DOTNET_VERSION: '6.0.x'           # Set this to the dot net version to use
+  AZURE_WEBAPP_NAME: portfolio_2025           # TODO: set your Web App name
+  DOTNET_VERSION: '9.0.x'
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      # Check out the repo
-      - uses: actions/checkout@main
+      - uses: actions/checkout@v4
 
-      # Setup .NET Core SDK
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      # Run dotnet build and publish
-      - name: dotnet build and publish
+      - name: Restore, Build, Publish
+        working-directory: api
         run: |
-          dotnet restore
-          dotnet build --configuration Release
-          dotnet publish -c Release --property:PublishDir='${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
+          dotnet restore Api.csproj
+          dotnet publish Api.csproj -c Release -o ./publish
 
-      # Deploy to Azure Web apps
-      - name: 'Run Azure webapp deploy action using publish profile credentials'
+      - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }} # Replace with your app name
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }} # Define secret variable in repository settings as per action documentation
-          package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: api/publish

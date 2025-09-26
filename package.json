@@ -1,0 +1,17 @@
+{
+  "name": "portfolio-root",
+  "private": true,
+  "version": "0.0.0",
+  "engines": {
+    "node": ">=20.19.0 <21 || >=22.12.0",
+    "npm": ">=10.0.0"
+  },
+  "scripts": {
+    "dev:api": "cd api && dotnet watch",
+    "dev:web": "cd frontend && npm run dev",
+    "dev": "npm-run-all -p dev:api dev:web"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}
