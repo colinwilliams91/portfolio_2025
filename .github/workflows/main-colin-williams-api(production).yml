@@ -52,4 +52,4 @@ jobs:
           app-name: 'colin-williams-api'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_1234 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E148CFA85BCC4CAABE4A83AC459981CE }}
