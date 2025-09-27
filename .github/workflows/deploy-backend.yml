@@ -8,7 +8,7 @@ on:
       - ".github/workflows/deploy-backend.yml"
 
 env:
-  AZURE_WEBAPP_NAME: portfolio_2025           # TODO: set your Web App name
+  AZURE_WEBAPP_NAME: colin-williams-api
   DOTNET_VERSION: '9.0.x'
 
 jobs:
