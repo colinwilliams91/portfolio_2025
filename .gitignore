@@ -1,6 +1,8 @@
 # Keep the planning doc local-only
 .github/copilot-instructions.md
+# check in /docs/attachments in order to sync screen shots
 /docs/integrations
+/docs/attachments
 /docs/.*
 
 # Node
