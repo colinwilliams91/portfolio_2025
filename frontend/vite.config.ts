@@ -7,4 +7,16 @@ export default defineConfig({
   server: {
     port: 5173,
   },
+  define: {
+    __BUILD_VERSION__: JSON.stringify(
+      (process as any)?.env?.DEPLOY_ID || // Netlify
+        (process as any)?.env?.BUILD_VERSION ||
+        new Date().toISOString(),
+    ),
+    __BUILD_COMMIT__: JSON.stringify(
+      ((process as any)?.env?.COMMIT_REF || (process as any)?.env?.GITHUB_SHA || '')
+        .toString()
+        .slice(0, 7),
+    ),
+  },
 })

@@ -24,6 +24,12 @@ export default function App() {
       <main className="container mx-auto p-6">
         <ProjectsGrid />
       </main>
+      <footer className="container mx-auto px-6 pb-6 opacity-60 text-sm">
+        <div>
+          Build: {typeof __BUILD_VERSION__ !== 'undefined' ? __BUILD_VERSION__ : ''}
+          {typeof __BUILD_COMMIT__ !== 'undefined' && __BUILD_COMMIT__ ? ` · ${__BUILD_COMMIT__}` : ''}
+        </div>
+      </footer>
     </div>
   )
 }
