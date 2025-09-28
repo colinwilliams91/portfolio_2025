@@ -1,6 +1,6 @@
 import react from '@vitejs/plugin-react'
 
-const BUILD_VERSION = process.env.DEPLOY_ID || process.env.VITE_BUILD_VERSION || new Date().toISOString()
+const BUILD_VERSION = process.env.DEPLOY_ID?.slice(0, 7) || process.env.VITE_BUILD_VERSION || new Date().toISOString().replace(/[-]/g, '.')
 const BUILD_COMMIT = (process.env.COMMIT_REF || process.env.GITHUB_SHA || '').slice(0, 7)
 
 /** @type {import('vite').UserConfig} */
