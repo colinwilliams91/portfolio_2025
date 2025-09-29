@@ -1,10 +1,14 @@
 import './App.css'
 
 import { useEffect, useState } from 'react'
+import { THEMES, type Theme, isTheme } from './constants/style'
 import ProjectsGrid from './components/ProjectsGrid'
 
 export default function App() {
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => (localStorage.getItem('theme') as 'light' | 'dark') || 'light')
+  const [theme, setTheme] = useState<Theme>(() => {
+    const stored = localStorage.getItem('theme')
+    return isTheme(stored) ? stored : THEMES.LIGHT
+  })
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
@@ -16,8 +20,8 @@ export default function App() {
       <div className="navbar bg-base-100 border-b">
         <div className="flex-1 px-2 text-xl font-semibold">Portfolio</div>
         <div className="flex-none">
-          <button className="btn btn-ghost" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
-            {theme === 'light' ? '🌙' : '☀️'}
+          <button className="btn btn-ghost" onClick={() => setTheme(theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT)}>
+            {theme === THEMES.LIGHT ? '🌙' : '☀️'}
           </button>
         </div>
       </div>
